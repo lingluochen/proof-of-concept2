@@ -6,17 +6,22 @@ public class phoneOrder : MonoBehaviour
 {
     public float nextTime;
     public float timeCounter;
-    public List<GameObject> proteins;
-    public List<GameObject> rice;
-    public List<GameObject> veggies;
+    public List<string> proteins;
+    public List<string> rice;
+    public List<string> veggies;
     public Transform startPos;
+    public Vector2 thePos;
     public List<GameObject> orders;
-    public GameObject phoneObj;
     public bool opened;
+    public GameObject order;
+    public int numOfOrders = 0;
+    public List<Vector2> orderPos;
+    
     // Start is called before the first frame update
     void Start()
     {
         nextTime = Random.Range(1000, 1500);
+        thePos = startPos.position;
 
     }
 
@@ -28,65 +33,71 @@ public class phoneOrder : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (opened)
+        
+        if (orders.Count < 4)
         {
-            phoneObj.SetActive(true);
+            timeCounter += 1;
+            if (timeCounter > nextTime)
+            {
+                timeCounter = 0;
+                nextTime = Random.Range(1000, 1500);
+
+                int riceIdx = Random.Range(0, rice.Count);
+                string ingre1 = rice[riceIdx];
+                int veggieIdx = Random.Range(0, veggies.Count);
+                string ingre2 = veggies[veggieIdx];
+                int proteinIdx = Random.Range(0, proteins.Count);
+                string ingre3 = proteins[proteinIdx];
+
+                GameObject newOrder = new GameObject();
+
+                if (orderPos.Count > 0)
+                {
+                    newOrder = Instantiate(order, new Vector2(orderPos[orderPos.Count - 1].x + 5.1f, transform.position.y + 5), Quaternion.Euler(0, 0, 0));
+                }
+                else
+                {
+                    newOrder = Instantiate(order, new Vector2(transform.position.x, transform.position.y + 5), Quaternion.Euler(0, 0, 0));
+                }
+                newOrder.GetComponent<orderReceipt>().riceIdx = riceIdx;
+                newOrder.GetComponent<orderReceipt>().veggieIdx = veggieIdx;
+                newOrder.GetComponent<orderReceipt>().proteinIdx = proteinIdx;
+
+                newOrder.GetComponent<orderReceipt>().riceName = ingre1;
+                newOrder.GetComponent<orderReceipt>().veggieName = ingre2;
+                newOrder.GetComponent<orderReceipt>().proteinName = ingre3;
+
+                newOrder.transform.parent = transform;
+                newOrder.GetComponent<SpriteRenderer>().sortingOrder = 2;
+
+                orders.Add(newOrder);
+
+
+
+            }
+
+            
+
         }
         else
         {
-            phoneObj.SetActive(false);
-        }
-        timeCounter += 1;
-        if (timeCounter > nextTime)
-        {
             timeCounter = 0;
-            nextTime = Random.Range(1000, 1500);
-            int num = Random.Range(3, 5);
-            List<GameObject> ingres = new List<GameObject>();
-            if (num == 3)
-            {
-                GameObject ingre1 = rice[Random.Range(0, rice.Count)];
-                GameObject ingre2 = proteins[Random.Range(0, proteins.Count)];
-                GameObject ingre3 = veggies[Random.Range(0, veggies.Count)];
-                ingres.Add(ingre1);
-                ingres.Add(ingre2);
-                ingres.Add(ingre3);
-            }
-            else
-            {
-                GameObject ingre1 = rice[Random.Range(0, rice.Count)];
-                GameObject ingre2 = proteins[Random.Range(0, proteins.Count)];
-                int veggieIdx1 = Random.Range(0, veggies.Count);
-                int veggieIdx2 = Random.Range(0, veggies.Count);
-                while (veggieIdx1 == veggieIdx2)
-                {
-                    veggieIdx2 = Random.Range(0, veggies.Count);
-                }
-                GameObject ingre3 = veggies[veggieIdx1];
-                GameObject ingre4 = veggies[veggieIdx2];
-                ingres.Add(ingre1);
-                ingres.Add(ingre2);
-                ingres.Add(ingre3);
-                ingres.Add(ingre4);
-            }
-
-            foreach (GameObject order in orders)
-            {
-                order.transform.position = new Vector2(order.transform.position.x, order.transform.position.y + 2.5f);
-            }
-            GameObject newSet = Instantiate(ingres[0], startPos.position, Quaternion.Euler(0, 0, 0));
-            newSet.transform.parent = phoneObj.transform;
-            newSet.GetComponent<SpriteRenderer>().sortingOrder = 2;
-            for (int i = 1; i < ingres.Count; i++)
-            {
-                GameObject thisIngre = Instantiate(ingres[i], new Vector2(startPos.position.x + i * 2.5f, startPos.position.y), Quaternion.Euler(0, 0, 0));
-                thisIngre.transform.parent = newSet.transform;
-                thisIngre.GetComponent<SpriteRenderer>().sortingOrder = 2;
-            }
-           
-            orders.Add(newSet);
-
         }
+
+
+        Vector2 newPos = thePos;
+        List<Vector2> tempOrderPos = new List<Vector2>();
+        foreach (GameObject order in orders)
+        {
+            tempOrderPos.Add(newPos);
+            newPos = new Vector2(newPos.x + 5.1f, thePos.y);
+        }
+        orderPos = tempOrderPos;
+        for (int i = 0; i < orders.Count; i++)
+        {
+            orders[i].transform.position = Vector2.MoveTowards(orders[i].transform.position, orderPos[i], 0.4f);
+        }
+
     }
 
 
@@ -102,6 +113,24 @@ public class phoneOrder : MonoBehaviour
             {
                 opened = false;
             }
+        }
+    }
+
+
+    public void redoList()
+    {
+        List<GameObject> tempOrders = new List<GameObject>();
+        foreach(GameObject order in orders)
+        {
+            if (order != null)
+            {
+                tempOrders.Add(order);
+            }
+        }
+        orders.Clear();
+        foreach(GameObject order in tempOrders)
+        {
+            orders.Add(order);
         }
     }
 }

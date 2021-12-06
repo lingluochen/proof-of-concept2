@@ -5,6 +5,7 @@ using UnityEngine;
 public class cutLine : MonoBehaviour
 {
     public bool over;
+    public bool beingCut;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,11 +17,24 @@ public class cutLine : MonoBehaviour
     {
         if (over)
         {
-            GetComponent<SpriteRenderer>().color = Color.red;
+            if (!beingCut)
+            {
+                GetComponent<SpriteRenderer>().color = Color.red;
+            }
         }
         else
         {
             GetComponent<SpriteRenderer>().color = Color.white;
         }
+
+        if (beingCut)
+        {
+            GetComponent<SpriteRenderer>().color = Color.blue;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        Debug.Log("3");
     }
 }

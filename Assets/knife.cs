@@ -7,6 +7,8 @@ public class knife : MonoBehaviour
     public gameManager manager;
     public GameObject actualKnife;
     public bool inArea;
+    public bool knifePicked;
+    public bool dontRotate;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,16 +22,37 @@ public class knife : MonoBehaviour
         
     }
 
+    private void FixedUpdate()
+    {
+
+    }
 
     private void OnMouseOver()
     {
         if (inArea && Input.GetMouseButtonDown(0))
         {
-            actualKnife.AddComponent<pick>();
-            actualKnife.GetComponent<pick>().beingPicked = true;
-            manager.picked = true;
-            manager.pickObj = actualKnife;
-            actualKnife.transform.eulerAngles = new Vector3(0, 0, 90);
+            if (!knifePicked)
+            {
+                actualKnife.AddComponent<pick>();
+                actualKnife.GetComponent<pick>().beingPicked = true;
+                actualKnife.GetComponent<pick>().manualOrder = true;
+                actualKnife.GetComponent<SpriteRenderer>().sortingOrder = 30;
+                manager.picked = true;
+                manager.pickObj = actualKnife;
+                if (!dontRotate)
+                {
+                    actualKnife.transform.eulerAngles = new Vector3(0, 0, 90);
+                }
+                knifePicked = true;
+            }
+            else
+            {
+                Destroy(actualKnife.GetComponent<pick>());
+                manager.picked = false;
+                manager.pickObj = null;
+                actualKnife.transform.eulerAngles = new Vector3(0, 0, 0);
+                knifePicked = false;
+            }
         }
     }
 

@@ -20,7 +20,7 @@ public class putDown : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (gm.picked && Input.GetMouseButtonDown(0) && gm.pickObj != null && canPut)
+        if (gm.picked && Input.GetMouseButtonDown(0) && gm.pickObj != null && canPut && gm.pickObj.tag != "knife")
         {
             gm.pickObj.GetComponent<pick>().beingPicked = false;
             gm.pickObj.transform.parent = this.gameObject.transform;

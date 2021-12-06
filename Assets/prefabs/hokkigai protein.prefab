@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2951788982842143799}
   - component: {fileID: 808508605250104910}
   m_Layer: 0
-  m_Name: hokkigai
+  m_Name: hokkigai protein
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

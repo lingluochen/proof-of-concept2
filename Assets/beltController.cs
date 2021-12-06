@@ -16,6 +16,7 @@ public class beltController : MonoBehaviour
     public Transform bound;
     public bool foodOut;
     public foodList connectedList;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,12 +27,14 @@ public class beltController : MonoBehaviour
         {
             spd = -spd;
         }
+        anim = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        changeState("still");
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -48,7 +51,7 @@ public class beltController : MonoBehaviour
                 if (manager.pickObj != null)
                 {
                     theFood = manager.pickObj;
-                    
+
                 }
                 theFood.transform.parent = belt.transform;
                 manager.pickObj = null;
@@ -70,22 +73,26 @@ public class beltController : MonoBehaviour
                 {
                     if (theFood.transform.position.x > bound.transform.position.x)
                     {
-                        theFood.transform.Translate(new Vector2(-spd/2, 0));
+                        theFood.transform.Translate(new Vector2(-spd / 2, 0));
+                        changeState("moving");
                     }
                     else
                     {
                         foodOut = true;
+                        changeState("still");
                     }
                 }
                 else
                 {
                     if (theFood.transform.position.x < bound.transform.position.x)
                     {
-                        theFood.transform.Translate(new Vector2(spd/2, 0));
+                        theFood.transform.Translate(new Vector2(spd / 2, 0));
+                        changeState("moving");
                     }
                     else
                     {
                         foodOut = true;
+                        changeState("still");
                     }
                 }
             }
@@ -97,6 +104,7 @@ public class beltController : MonoBehaviour
             connectedList.foods.Add(theFood);
             theFood = null;
             foodOut = false;
+
         }
 
     }
@@ -118,10 +126,10 @@ public class beltController : MonoBehaviour
         if (manager.picked && manager.pickObj.tag == "cooked")
         {
             detectedFood = true;
-           
+
         }
     }
-    
+
     private void OnMouseExit()
     {
         if (manager.picked && manager.pickObj.tag == "cooked")
@@ -129,5 +137,10 @@ public class beltController : MonoBehaviour
             detectedFood = false;
         }
     }
-    
+
+
+    public void changeState(string target)
+    {
+        anim.Play(target);
+    }
 }

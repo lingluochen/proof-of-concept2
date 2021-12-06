@@ -6,6 +6,7 @@ public class cookedFood : MonoBehaviour
 {
     public bool picked;
     public gameManager manager;
+    public int index;
     // Start is called before the first frame update
     void Start()
     {

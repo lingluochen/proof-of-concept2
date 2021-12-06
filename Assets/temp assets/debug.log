@@ -1,1 +1,3 @@
 [1129/124116.517:WARNING:dns_config_service_win.cc(668)] Failed to read DnsConfig.
+[1204/111139.387:ERROR:browser_gpu_channel_host_factory.cc(139)] Failed to launch GPU process.
+[1205/044721.267:ERROR:browser_gpu_channel_host_factory.cc(139)] Failed to launch GPU process.
