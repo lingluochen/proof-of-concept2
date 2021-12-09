@@ -95,6 +95,7 @@ public class phoneOrder : MonoBehaviour
         orderPos = tempOrderPos;
         for (int i = 0; i < orders.Count; i++)
         {
+            orders[i].GetComponent<orderReceipt>().index = i;
             orders[i].transform.position = Vector2.MoveTowards(orders[i].transform.position, orderPos[i], 0.4f);
         }
 

@@ -41,11 +41,9 @@ public class icon : MonoBehaviour
 
                 counter += 1;
                 transform.localScale = new Vector2(scale, scale);
-                if (meat)
+                if (meat && counter == 1)
                 {
-                    float scaleX = health.transform.localScale.x;
-                    scaleX -= 0.5f;
-                    health.transform.localScale = new Vector2(scaleX, health.transform.localScale.y);
+                    GameObject.Find("Heart Manager").GetComponent<heartManager>().health -= 1;
                 }
 
             }

@@ -23,9 +23,17 @@ public class orderReceipt : MonoBehaviour
     public GameObject r;
     public GameObject v;
     public GameObject p;
+    public GameObject roll;
+    public GameObject bar;
+    public float maxCounter;
+    public float counter;
+    public float scale;
+    public List<GameObject> orders;
+    public int index;
     // Start is called before the first frame update
     void Start()
     {
+        orders = GameObject.Find("phone icon").GetComponent<phoneOrder>().orders;
         GameObject theRice = Instantiate(rices[riceIdx], transform.GetChild(0).position, Quaternion.Euler(0, 0, 0));
         GameObject theVeggie = Instantiate(veggies[veggieIdx], transform.GetChild(1).position, Quaternion.Euler(0, 0, 0));
         GameObject theProtein = Instantiate(proteins[proteinIdx], transform.GetChild(2).position, Quaternion.Euler(0, 0, 0));
@@ -33,6 +41,7 @@ public class orderReceipt : MonoBehaviour
         r = theRice;
         v = theVeggie;
         p = theProtein;
+        roll = theRoll;
         theRice.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
         theVeggie.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
         theProtein.GetComponent<SpriteRenderer>().sortingOrder = GetComponent<SpriteRenderer>().sortingOrder + 1;
@@ -56,6 +65,8 @@ public class orderReceipt : MonoBehaviour
         ingredients.Add(riceName);
         ingredients.Add(veggieName);
         ingredients.Add(proteinName);
+        counter = maxCounter;
+        scale = bar.transform.localScale.x;
     }
 
     // Update is called once per frame
@@ -74,5 +85,50 @@ public class orderReceipt : MonoBehaviour
                 Destroy(this.gameObject);
             }
         }
+
+        if (counter > 0)
+        {
+            counter -= 1;
+            bar.transform.localScale = new Vector2((counter / maxCounter) * scale, bar.transform.localScale.y);
+        }
+        else
+        {
+            counter -= 1;
+            fade(this.gameObject);
+            foreach (Transform child in transform)
+            {
+                if (child.gameObject.GetComponent<SpriteRenderer>() != null)
+                {
+                    fade(child.gameObject);
+                }
+            }
+            foreach(Transform child in roll.transform)
+            {
+                if (child.gameObject.GetComponent<SpriteRenderer>() != null)
+                {
+                    fade(child.gameObject);
+                }
+            }
+            if (counter < -30)
+            {
+                orders[index] = null;
+                GameObject.Find("phone icon").GetComponent<phoneOrder>().redoList();
+                Destroy(this.gameObject);
+            }
+        }
+        
+        if (counter < maxCounter / 5)
+        {
+            bar.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+
+        
+    }
+
+    void fade(GameObject obj)
+    {
+        var c = obj.GetComponent<SpriteRenderer>().color;
+        c.a -= 0.05f;
+        obj.GetComponent<SpriteRenderer>().color = c;
     }
 }
