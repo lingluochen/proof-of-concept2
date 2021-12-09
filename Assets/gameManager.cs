@@ -32,11 +32,10 @@ public class gameManager : MonoBehaviour
         {
             GameObject newPlate = Instantiate(plate, plateGen.position, Quaternion.Euler(0, 0, 0));
             thePlate = newPlate;
-            GameObject newSeaweed = Instantiate(seaweed, seaweedGen.position, Quaternion.Euler(0, 0, 0));
-            theSeaweed = newSeaweed;
+            generateSeaweed();
             theWrapper.startScroll = false;
             theWrapper.scrollCounter = 0;
-            theWrapper.currentSeaweed = theSeaweed;
+            
         }
         else
         {
@@ -47,5 +46,12 @@ public class gameManager : MonoBehaviour
         {
             theSeaweed.transform.position = Vector2.MoveTowards(theSeaweed.transform.position, seaweedPos.position, 0.5f);
         }
+    }
+
+    public void generateSeaweed()
+    {
+        GameObject newSeaweed = Instantiate(seaweed, seaweedGen.position, Quaternion.Euler(0, 0, 0));
+        theSeaweed = newSeaweed;
+        theWrapper.currentSeaweed = theSeaweed;
     }
 }

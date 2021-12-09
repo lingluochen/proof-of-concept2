@@ -25,7 +25,7 @@ public class switchCamera : MonoBehaviour
             {
                 if (cam.transform.position.x < pos.position.x)
                 {
-                    cam.transform.Translate(new Vector2(0.2f, 0));
+                    cam.transform.Translate(new Vector2(0.5f, 0));
                     manager.cameraMoving = true;
                     GameObject.Find("moving tentacle").transform.GetChild(0).GetComponent<pick>().beingPicked = false;
                 }
@@ -33,6 +33,7 @@ public class switchCamera : MonoBehaviour
                 {
                     switchPos = false;
                     manager.cameraMoving = false;
+                    cam.transform.position = new Vector3(pos.position.x, cam.transform.position.y,-10);
                     GameObject.Find("moving tentacle").transform.GetChild(0).GetComponent<pick>().beingPicked = true;
                 }
             }
@@ -40,7 +41,7 @@ public class switchCamera : MonoBehaviour
             {
                 if (cam.transform.position.x > pos.position.x)
                 {
-                    cam.transform.Translate(new Vector2(-0.2f, 0));
+                    cam.transform.Translate(new Vector2(-0.5f, 0));
                     manager.cameraMoving = true;
                     GameObject.Find("moving tentacle").transform.GetChild(0).GetComponent<pick>().beingPicked = false;
                 }
@@ -48,6 +49,7 @@ public class switchCamera : MonoBehaviour
                 {
                     switchPos = false;
                     manager.cameraMoving = false;
+                    cam.transform.position = new Vector3(pos.position.x, cam.transform.position.y,-10);
                     GameObject.Find("moving tentacle").transform.GetChild(0).GetComponent<pick>().beingPicked = true;
                 }
             }

@@ -74,7 +74,7 @@ public class icon : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !gm.picked)
         {
             picked = true;
         }

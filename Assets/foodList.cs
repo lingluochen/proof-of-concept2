@@ -22,6 +22,11 @@ public class foodList : MonoBehaviour
         int tempIdx = 0;
         foreach (GameObject f in foods)
         {
+            if (f == null)
+            {
+                redoList();
+                break;
+            }
             f.GetComponent<cookedFood>().index = tempIdx;
             tempIdx += 1;
             tempFoodPos.Add(initialPos);
@@ -32,5 +37,23 @@ public class foodList : MonoBehaviour
             initialPos = new Vector2(transform.position.x, initialPos.y + 1);
         }
         
+    }
+
+
+    public void redoList()
+    {
+        List<GameObject> tempList = new List<GameObject>();
+        foreach(GameObject obj in foods)
+        {
+            if (obj != null)
+            {
+                tempList.Add(obj);
+            }
+        }
+        foods.Clear();
+        foreach(GameObject obj in tempList)
+        {
+            foods.Add(obj);
+        }
     }
 }

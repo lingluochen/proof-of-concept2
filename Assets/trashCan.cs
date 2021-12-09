@@ -5,6 +5,7 @@ using UnityEngine;
 public class trashCan : MonoBehaviour
 {
     public gameManager manager;
+    public wrapController theWrapper;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,8 +20,14 @@ public class trashCan : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (manager.picked && manager.pickObj != null && Input.GetMouseButtonDown(0))
+        if (manager.picked && manager.pickObj != null && Input.GetMouseButtonDown(0) && manager.pickObj.tag != "knife")
         {
+            if (manager.pickObj.tag == "sushi")
+            {
+                manager.generateSeaweed();
+                theWrapper.startScroll = false;
+                theWrapper.scrollCounter = 0;
+            }
             manager.picked = false;
             GameObject theObj = manager.pickObj;
             manager.pickObj = null;
