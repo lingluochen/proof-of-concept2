@@ -64,6 +64,7 @@ public class plate : MonoBehaviour
         {
             if (theOrder != null)
             {
+                manager.money += 10;
                 GameObject thisSushi = manager.pickObj;
                 manager.pickObj = null;
                 manager.picked = false;

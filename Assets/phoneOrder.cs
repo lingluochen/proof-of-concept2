@@ -21,20 +21,20 @@ public class phoneOrder : MonoBehaviour
     void Start()
     {
         nextTime = Random.Range(1000, 1500);
-        thePos = startPos.position;
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        thePos = startPos.position;
     }
 
     private void FixedUpdate()
     {
         
-        if (orders.Count < 4)
+        if (orders.Count < 3)
         {
             timeCounter += 1;
             if (timeCounter > nextTime)

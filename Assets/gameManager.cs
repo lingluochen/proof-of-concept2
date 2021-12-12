@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class gameManager : MonoBehaviour
 {
@@ -19,6 +21,11 @@ public class gameManager : MonoBehaviour
     public Transform plateGen;
     public Transform seaweedGen;
     public wrapController theWrapper;
+    public int money;
+    public Text moneyTxt;
+    public GameObject timer;
+    public float gameCount;
+    public float maxGameCount;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +39,7 @@ public class gameManager : MonoBehaviour
         {
             GameObject newPlate = Instantiate(plate, plateGen.position, Quaternion.Euler(0, 0, 0));
             thePlate = newPlate;
+            thePlate.GetComponent<SpriteRenderer>().sortingOrder = 0;
             generateSeaweed();
             theWrapper.startScroll = false;
             theWrapper.scrollCounter = 0;
@@ -46,6 +54,22 @@ public class gameManager : MonoBehaviour
         {
             theSeaweed.transform.position = Vector2.MoveTowards(theSeaweed.transform.position, seaweedPos.position, 0.5f);
         }
+
+        string moneyString = money.ToString();
+        moneyTxt.text = moneyString;
+
+        if (gameCount < maxGameCount)
+        {
+            gameCount += 1;
+            timer.transform.eulerAngles = new Vector3(0, 0, -(gameCount / maxGameCount) * 360);
+        }
+        else
+        {
+            ES3.Save("money", money);
+            SceneManager.LoadScene("end screen 1", LoadSceneMode.Single);
+        }
+
+
     }
 
     public void generateSeaweed()

@@ -39,6 +39,14 @@ public class beltController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (connectedList.validVeggieNum < 3)
+        {
+
+        }
+        else
+        {
+
+        }
         if (detectedFood)
         {
             if (counter < maxCounter)
@@ -101,7 +109,14 @@ public class beltController : MonoBehaviour
         if (foodOut)
         {
             receivedFood = false;
-            connectedList.foods.Add(theFood);
+            for (int i = 0; i < connectedList.foods.Count; i++)
+            {
+                if (connectedList.foods[i] == null)
+                {
+                    connectedList.foods[i] = theFood;
+                    break;
+                }
+            }
             theFood = null;
             foodOut = false;
 
@@ -123,10 +138,9 @@ public class beltController : MonoBehaviour
 
     private void OnMouseEnter()
     {
-        if (manager.picked && manager.pickObj.tag == "cooked")
+        if (manager.picked && manager.pickObj.tag == "cooked" && connectedList.validVeggieNum < 3)
         {
             detectedFood = true;
-
         }
     }
 

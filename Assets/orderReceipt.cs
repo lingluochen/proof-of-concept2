@@ -30,6 +30,7 @@ public class orderReceipt : MonoBehaviour
     public float scale;
     public List<GameObject> orders;
     public int index;
+    public GameObject theSushi;
     // Start is called before the first frame update
     void Start()
     {
@@ -122,6 +123,11 @@ public class orderReceipt : MonoBehaviour
             bar.GetComponent<SpriteRenderer>().color = Color.red;
         }
 
+        if (theSushi == null)
+        {
+            match = false;
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
         
     }
 

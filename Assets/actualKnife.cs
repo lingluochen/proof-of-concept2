@@ -10,7 +10,7 @@ public class actualKnife : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -28,16 +28,19 @@ public class actualKnife : MonoBehaviour
                 thisLine.GetComponent<cutLine>().beingCut = true;
             }
         }
-        else
-        {
+        else {
+        
+
             hitLine = false;
             if (thisLine != null)
             {
                 thisLine.GetComponent<cutLine>().over = false;
             }
             thisLine = null;
-            
+
         }
+
+        
     }
 
     /*

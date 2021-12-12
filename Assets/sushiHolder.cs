@@ -35,8 +35,12 @@ public class sushiHolder : MonoBehaviour
 
                 if (match)
                 {
-                    order.GetComponent<SpriteRenderer>().color = Color.red;
-                    order.GetComponent<orderReceipt>().match = match;
+                    if (order.GetComponent<orderReceipt>().counter > 0)
+                    {
+                        order.GetComponent<orderReceipt>().theSushi = this.gameObject;
+                        order.GetComponent<SpriteRenderer>().color = new Color32(152, 251, 152, 255);
+                        order.GetComponent<orderReceipt>().match = match;
+                    }
                 }
             }
         }

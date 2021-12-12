@@ -5,13 +5,19 @@ using UnityEngine;
 public class foodList : MonoBehaviour
 {
     public List<GameObject> foods;
-    public List<Vector2> foodPos;
     public Transform bound;
     public int index;
+    public int validVeggieNum;
+    public List<veggiePlate> plates;
     // Start is called before the first frame update
     void Start()
     {
-        
+        int t = 0;
+        foreach (veggiePlate plate in plates)
+        {
+            plate.index = t;
+            t += 1;
+        }
     }
 
     // Update is called once per frame
@@ -20,30 +26,34 @@ public class foodList : MonoBehaviour
         List<Vector2> tempFoodPos = new List<Vector2>();
         Vector2 initialPos = new Vector2(transform.position.x, bound.position.y);
         int tempIdx = 0;
+        int validNum = 0;
         foreach (GameObject f in foods)
         {
+            /*
             if (f == null)
             {
                 redoList();
                 break;
             }
-            f.GetComponent<cookedFood>().index = tempIdx;
+            */
+            plates[tempIdx].myVeggie = f;
             tempIdx += 1;
-            tempFoodPos.Add(initialPos);
-            if (!f.GetComponent<cookedFood>().picked)
+            
+            if (f != null)
             {
-                f.transform.position = initialPos;
+                validNum += 1;
             }
-            initialPos = new Vector2(transform.position.x, initialPos.y + 1);
+            
         }
-        
+        validVeggieNum = validNum;
+
     }
 
-
+    /*
     public void redoList()
     {
         List<GameObject> tempList = new List<GameObject>();
-        foreach(GameObject obj in foods)
+        foreach (GameObject obj in foods)
         {
             if (obj != null)
             {
@@ -51,9 +61,10 @@ public class foodList : MonoBehaviour
             }
         }
         foods.Clear();
-        foreach(GameObject obj in tempList)
+        foreach (GameObject obj in tempList)
         {
             foods.Add(obj);
         }
     }
+    */
 }

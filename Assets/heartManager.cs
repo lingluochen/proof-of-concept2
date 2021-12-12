@@ -9,6 +9,7 @@ public class heartManager : MonoBehaviour
     public GameObject heart;
     public Sprite grayHeart;
     public Sprite redHeart;
+    public int maxHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +27,10 @@ public class heartManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (health > maxHealth)
+        {
+            health = maxHealth;
+        }
         for (int i = 0; i < hearts.Count; i++)
         {
             if (i < health)

@@ -313,7 +313,7 @@ MonoBehaviour:
   p: {fileID: 0}
   roll: {fileID: 0}
   bar: {fileID: 5886739491196483548}
-  maxCounter: 3000
+  maxCounter: 4000
   counter: 0
   scale: 0
   orders: []

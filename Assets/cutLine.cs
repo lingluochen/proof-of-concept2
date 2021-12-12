@@ -24,7 +24,10 @@ public class cutLine : MonoBehaviour
         }
         else
         {
-            GetComponent<SpriteRenderer>().color = Color.white;
+            if (!beingCut)
+            {
+                GetComponent<SpriteRenderer>().color = Color.white;
+            }
         }
 
         if (beingCut)

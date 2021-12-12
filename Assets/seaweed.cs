@@ -16,6 +16,7 @@ public class seaweed : MonoBehaviour
     public List<GameObject> veggies;
     public GameObject theVeggie;
     public GameObject theProtein;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,12 @@ public class seaweed : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (theProtein != null)
+        {
+            theProtein.transform.parent = transform;
+            //manager.pickObj.GetComponent<cookedFood>().picked = false;
+            hasProtein = true;
+        }
     }
 
 
@@ -41,7 +47,7 @@ public class seaweed : MonoBehaviour
                 manager.pickObj.GetComponent<cookedFood>().picked = false;
                 manager.pickObj.GetComponent<pick>().beingPicked = false;
                 GameObject tempRice = manager.pickObj;
-                riceList.foods.RemoveAt(manager.pickObj.GetComponent<cookedFood>().index);
+                //riceList.foods.RemoveAt(manager.pickObj.GetComponent<cookedFood>().index);
                 if (manager.pickObj.name.Contains("white"))
                 {
                     theFlat = Instantiate(flatWhite, transform.position, Quaternion.Euler(0, 0, 0));
@@ -62,7 +68,7 @@ public class seaweed : MonoBehaviour
                 manager.pickObj.transform.parent = transform;
                 manager.pickObj.GetComponent<cookedFood>().picked = false;
                 manager.pickObj.GetComponent<pick>().beingPicked = false;
-                veggieList.foods.RemoveAt(manager.pickObj.GetComponent<cookedFood>().index);
+                //veggieList.foods.RemoveAt(manager.pickObj.GetComponent<cookedFood>().index);
                 GameObject tempVeggie = manager.pickObj;
                 if (manager.pickObj.name.Contains("avocado"))
                 {
@@ -85,18 +91,13 @@ public class seaweed : MonoBehaviour
                 hasVeggie = true;
                 Destroy(tempVeggie);
             }
-
+            /*
             if (manager.pickObj != null && manager.pickObj.name.Contains("protein") && hasRice && !hasProtein)
             {
                 theProtein = manager.pickObj;
-                manager.pickObj.transform.parent = transform;
-                //manager.pickObj.GetComponent<cookedFood>().picked = false;
-                manager.pickObj.GetComponent<pick>().beingPicked = false;
-                manager.pickObj = null;
-                manager.picked = false;
-                hasProtein = true;
+                
             }
-
+            */
         }
     }
 
