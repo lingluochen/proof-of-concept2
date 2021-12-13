@@ -6157,7 +6157,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 1.7330104, y: -0.000000718981}
+  m_ConnectedAnchor: {x: 1.7330104, y: -0.00000051409006}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -9737,6 +9737,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goNext: 0
   instru: {fileID: 868114163}
+  buttonSprite: {fileID: 1486217285}
+  hoverColor: {r: 0.74509805, g: 0.17254902, b: 0.28627452, a: 1}
+  noHoverColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!61 &1486217284
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -12605,6 +12608,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goNext: 1
   instru: {fileID: 868114163}
+  buttonSprite: {fileID: 1906513726}
+  hoverColor: {r: 0.74509805, g: 0.17254902, b: 0.28627452, a: 1}
+  noHoverColor: {r: 0, g: 0, b: 0, a: 1}
 --- !u!1 &1907158441 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7004169272104782569, guid: 49ef566f7a5e8d1418024f871129dec0, type: 3}

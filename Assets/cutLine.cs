@@ -28,13 +28,13 @@ public class cutLine : MonoBehaviour
         {
             if (!beingCut)
             {
-                GetComponent<SpriteRenderer>().color = new Color32(153, 255, 153, 225);
+                GetComponent<SpriteRenderer>().color = new Color32(225, 102, 102, 225);
             }
         }
 
         if (beingCut)
         {
-            GetComponent<SpriteRenderer>().color = new Color32(225, 102, 102, 225);
+            GetComponent<SpriteRenderer>().color = new Color32(153, 255, 153, 225); //green
             cutAudio.SetActive(true);
         }
     }

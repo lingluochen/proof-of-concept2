@@ -9,10 +9,14 @@ public class nextInstructionPage : MonoBehaviour
     public bool goNext;
     public instructions instru;
 
+    public SpriteRenderer buttonSprite;
+    bool hover;
+    public Color hoverColor, noHoverColor;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        buttonSprite.color = noHoverColor;
     }
 
     void Update()
@@ -42,6 +46,10 @@ public class nextInstructionPage : MonoBehaviour
     }
     void OnMouseOver()
     {
+        Debug.Log("on arrow button.");
+        buttonSprite.color = hoverColor;
+        hover = true;
+
         if (Input.GetMouseButtonDown(0))
         {
             if (goNext)
@@ -67,6 +75,8 @@ public class nextInstructionPage : MonoBehaviour
 
     void OnMouseExit()
     {
-        
+        Debug.Log("not on arrow button.");
+        buttonSprite.color = noHoverColor;
+        hover = false;
     }
 }
