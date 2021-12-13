@@ -10,10 +10,13 @@ public class heartManager : MonoBehaviour
     public GameObject heart;
     public Sprite grayHeart;
     public Sprite redHeart;
-    public int maxHealth;
+    public int maxHealth; 
+
+    public GameObject hurt;
     // Start is called before the first frame update
     void Start()
     {
+        hurt.SetActive(false);
         float newXPos = transform.position.x;
         float y = transform.position.y;
         redHeart = heart.GetComponent<SpriteRenderer>().sprite;
@@ -28,6 +31,7 @@ public class heartManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        hurt.SetActive(false);
         if (health > maxHealth)
         {
             health = maxHealth;
@@ -42,6 +46,10 @@ public class heartManager : MonoBehaviour
             {
                 hearts[i].GetComponent<SpriteRenderer>().sprite = grayHeart;
             }
+        }
+        if (health == 1)
+        {
+            hurt.SetActive(true);
         }
         if (health <= 0)
         {
