@@ -11,11 +11,13 @@ public class consume : MonoBehaviour
     public Vector2 oriPos;
     public heartManager heart;
     public wrapController theWrapper;
+    public GameObject audio;
     // Start is called before the first frame update
     void Start()
     {
         manager = GameObject.Find("Game Manager").GetComponent<gameManager>();
         oriPos = transform.position;
+        audio.SetActive(false);
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class consume : MonoBehaviour
     {
         if (eating)
         {
+            audio.SetActive(true);
             eatCounter += 1;
             if (eatCounter < 30)
             {
@@ -30,10 +33,10 @@ public class consume : MonoBehaviour
             }
             else
             {
-                if (transform.childCount > 0)
+                if (transform.childCount > 1)
                 {
-                    Destroy(transform.GetChild(0).gameObject);
-                    heart.health += 3;
+                    Destroy(transform.GetChild(1).gameObject);
+                    heart.health += 2;
                 }
                 transform.position = Vector2.MoveTowards(transform.position, oriPos, 0.4f);
             }
@@ -41,6 +44,7 @@ public class consume : MonoBehaviour
             {
                 eatCounter = 0;
                 eating = false;
+                audio.SetActive(false);
             }
         }
     }

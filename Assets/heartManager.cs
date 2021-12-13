@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class heartManager : MonoBehaviour
 {
@@ -41,6 +42,10 @@ public class heartManager : MonoBehaviour
             {
                 hearts[i].GetComponent<SpriteRenderer>().sprite = grayHeart;
             }
+        }
+        if (health <= 0)
+        {
+            SceneManager.LoadScene("end screen 2", LoadSceneMode.Single);
         }
     }
 }

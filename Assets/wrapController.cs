@@ -11,11 +11,13 @@ public class wrapController : MonoBehaviour
     public bool startScroll;
     public float scrollCounter;
     public GameObject theScroll;
+    public GameObject audio;
  
     // Start is called before the first frame update
     void Start()
     {
         scroller = transform.GetChild(0).gameObject;
+        audio.SetActive(false);
     }
 
     // Update is called once per frame
@@ -35,11 +37,13 @@ public class wrapController : MonoBehaviour
             if (scrollCounter < 60 && scrollCounter > 10)
             {
                 scroller.GetComponent<SpriteRenderer>().enabled = true;
+                audio.SetActive(true);
             }
             else
             {
                 changeState("still");
                 scroller.GetComponent<SpriteRenderer>().enabled = false;
+                audio.SetActive(false);
             }
             scrollCounter += 1;
             if (scrollCounter > 10 && scrollCounter <= 45)

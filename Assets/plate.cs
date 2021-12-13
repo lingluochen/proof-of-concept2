@@ -11,11 +11,13 @@ public class plate : MonoBehaviour
     public float sendCounter;
     public int idx;
     public bool doOnce;
+    public GameObject audio;
     // Start is called before the first frame update
     void Start()
     {
         manager = GameObject.Find("Game Manager").GetComponent<gameManager>();
         orders = GameObject.Find("phone icon").GetComponent<phoneOrder>().orders;
+        audio.SetActive(false);
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class plate : MonoBehaviour
                 manager.thePlate = null;
                 theOrder.GetComponent<orderReceipt>().moving = true;
                 GameObject.Find("phone icon").GetComponent<phoneOrder>().redoList();
+                audio.SetActive(true);
                 doOnce = true;
             }
             

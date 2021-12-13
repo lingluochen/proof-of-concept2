@@ -42,7 +42,7 @@ public class protein : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (manager.theSeaweed != null)
+        if (manager.theSeaweed != null && !manager.manualOpen)
         {
             if (tentacle && manager.theSeaweed.GetComponent<seaweed>().hasRice)
             {

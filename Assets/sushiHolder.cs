@@ -49,7 +49,7 @@ public class sushiHolder : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0) && manager.pickObj == null && !manager.picked)
+        if (Input.GetMouseButtonDown(0) && manager.pickObj == null && !manager.picked && !manager.manualOpen)
         {
             manager.pickObj = this.gameObject;
             manager.picked = true;

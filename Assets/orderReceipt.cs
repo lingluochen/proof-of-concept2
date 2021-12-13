@@ -68,6 +68,9 @@ public class orderReceipt : MonoBehaviour
         ingredients.Add(proteinName);
         counter = maxCounter;
         scale = bar.transform.localScale.x;
+        r.transform.GetChild(0).gameObject.SetActive(false);
+        v.transform.GetChild(0).gameObject.SetActive(false);
+        p.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -81,6 +84,8 @@ public class orderReceipt : MonoBehaviour
             r.GetComponent<SpriteRenderer>().sortingOrder = 91;
             v.GetComponent<SpriteRenderer>().sortingOrder = 91;
             p.GetComponent<SpriteRenderer>().sortingOrder = 91;
+            r.transform.GetChild(0).gameObject.SetActive(false);
+
 
             if (movingCounter > 50){
                 Destroy(this.gameObject);

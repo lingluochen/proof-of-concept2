@@ -6,10 +6,12 @@ public class cutLine : MonoBehaviour
 {
     public bool over;
     public bool beingCut;
+    public GameObject cutAudio;
     // Start is called before the first frame update
     void Start()
     {
-        
+        cutAudio = transform.GetChild(0).gameObject;
+        cutAudio.SetActive(false);
     }
 
     // Update is called once per frame
@@ -19,20 +21,21 @@ public class cutLine : MonoBehaviour
         {
             if (!beingCut)
             {
-                GetComponent<SpriteRenderer>().color = Color.red;
+                GetComponent<SpriteRenderer>().color = new Color32(225,178,102,225);
             }
         }
         else
         {
             if (!beingCut)
             {
-                GetComponent<SpriteRenderer>().color = Color.white;
+                GetComponent<SpriteRenderer>().color = new Color32(153, 255, 153, 225);
             }
         }
 
         if (beingCut)
         {
-            GetComponent<SpriteRenderer>().color = Color.blue;
+            GetComponent<SpriteRenderer>().color = new Color32(225, 102, 102, 225);
+            cutAudio.SetActive(true);
         }
     }
 

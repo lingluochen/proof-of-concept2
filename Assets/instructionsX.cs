@@ -10,7 +10,7 @@ public class instructionsX : MonoBehaviour
     public SpriteRenderer buttonSprite, bookSprite;
     bool hover;
     public Color hoverColor, noHoverColor, ogColor;
-    public GameObject bookObject, instructionsObject, page1Object, page2Object, page3Object, page4Object, xObject;
+    public GameObject bookObject, instructionsObject, page1Object,  xObject;
 
 
     // Start is called before the first frame update
@@ -42,9 +42,6 @@ public class instructionsX : MonoBehaviour
             bookSprite.color = ogColor; //makethebook brown
             buttonSprite.color = noHoverColor;
             page1Object.SetActive(false);//hide the page
-            page2Object.SetActive(false);
-            page3Object.SetActive(false);
-            page4Object.SetActive(false);
             //bookObject.SetActive(true);//put the book back
         }
     }

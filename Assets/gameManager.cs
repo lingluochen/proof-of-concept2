@@ -26,15 +26,26 @@ public class gameManager : MonoBehaviour
     public GameObject timer;
     public float gameCount;
     public float maxGameCount;
+    public GameObject ticking;
+    public bool manualOpen;
+    public GameObject instru;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ticking.SetActive(false);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (instru.activeSelf)
+        {
+            manualOpen = true;
+        }
+        else
+        {
+            manualOpen = false;
+        }
         if (thePlate == null)
         {
             GameObject newPlate = Instantiate(plate, plateGen.position, Quaternion.Euler(0, 0, 0));
@@ -43,7 +54,7 @@ public class gameManager : MonoBehaviour
             generateSeaweed();
             theWrapper.startScroll = false;
             theWrapper.scrollCounter = 0;
-            
+
         }
         else
         {
@@ -62,6 +73,10 @@ public class gameManager : MonoBehaviour
         {
             gameCount += 1;
             timer.transform.eulerAngles = new Vector3(0, 0, -(gameCount / maxGameCount) * 360);
+            if (maxGameCount - gameCount < 1000)
+            {
+                ticking.SetActive(true);
+            }
         }
         else
         {

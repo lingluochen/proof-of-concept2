@@ -6,6 +6,7 @@ public class putDown : MonoBehaviour
 {
     public gameManager gm;
     public bool canPut = true;
+    public AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +21,13 @@ public class putDown : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (gm.picked && Input.GetMouseButtonDown(0) && gm.pickObj != null && canPut && gm.pickObj.tag != "knife")
+        if (gm.picked && Input.GetMouseButtonDown(0) && gm.pickObj != null && canPut && gm.pickObj.tag != "knife" && gm.pickObj.tag != "cooked")
         {
             gm.pickObj.GetComponent<pick>().beingPicked = false;
             gm.pickObj.transform.parent = this.gameObject.transform;
             gm.picked = false;
             gm.pickObj = null;
+            audio.Play();
         }
     }
 

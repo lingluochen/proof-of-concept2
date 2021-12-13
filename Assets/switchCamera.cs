@@ -9,6 +9,8 @@ public class switchCamera : MonoBehaviour
     public gameManager manager;
     public bool switchPos;
     public bool moveLeft;
+    public bool hover;
+    public AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,16 @@ public class switchCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (hover)
+        {
+            GetComponent<SpriteRenderer>().color = new Color32(255, 178, 102, 255);
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = Color.white;
+        }
+
         if (switchPos)
         {
             if (!moveLeft)
@@ -58,9 +70,20 @@ public class switchCamera : MonoBehaviour
 
     private void OnMouseOver()
     {
-        if (Input.GetMouseButtonDown(0) && !manager.picked && !manager.cameraMoving)
+        if (Input.GetMouseButtonDown(0) && !manager.picked && !manager.cameraMoving && !manager.manualOpen)
         {
             switchPos = true;
+            audio.Play();
         }
+    }
+
+    private void OnMouseEnter()
+    {
+        hover = true;
+    }
+
+    private void OnMouseExit()
+    {
+        hover = false;
     }
 }

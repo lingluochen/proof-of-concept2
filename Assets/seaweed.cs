@@ -16,13 +16,16 @@ public class seaweed : MonoBehaviour
     public List<GameObject> veggies;
     public GameObject theVeggie;
     public GameObject theProtein;
-    
+    public GameObject riceAudio;
+    public GameObject veggieAudio;
     // Start is called before the first frame update
     void Start()
     {
         manager = GameObject.Find("Game Manager").GetComponent<gameManager>();
         riceList = GameObject.Find("rice list").GetComponent<foodList>();
         veggieList = GameObject.Find("veggie list").GetComponent<foodList>();
+        riceAudio.SetActive(false);
+        veggieAudio.SetActive(false);
     }
 
     // Update is called once per frame
@@ -33,6 +36,14 @@ public class seaweed : MonoBehaviour
             theProtein.transform.parent = transform;
             //manager.pickObj.GetComponent<cookedFood>().picked = false;
             hasProtein = true;
+        }
+        if (hasRice)
+        {
+            riceAudio.SetActive(true);
+        }
+        if (hasVeggie)
+        {
+            veggieAudio.SetActive(true);
         }
     }
 

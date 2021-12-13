@@ -5,82 +5,68 @@ using UnityEngine;
 public class nextInstructionPage : MonoBehaviour
 {
 
-    public GameObject nextButtonObject, backButtonObject;
-    public SpriteRenderer nextButtonSprite, backButtonSprite;
-    bool hover, pageOne, pageTwo, pageThree, pageFour;
-    public Color hoverColor, noHoverColor;
-
-    public GameObject[] SpriteList;
+   
+    public bool goNext;
+    public instructions instru;
 
     // Start is called before the first frame update
     void Start()
     {
-        nextButtonSprite.color = noHoverColor;
-        pageOne = true;
+        
     }
 
     void Update()
     {
-        if (pageOne == true){
-            nextButtonObject.SetActive(true);
-            backButtonObject.SetActive(false);
-        } else if (pageFour == true){
-            nextButtonObject.SetActive(false);
-            backButtonObject.SetActive(true);
-        } else {
-            nextButtonObject.SetActive(true);
-            backButtonObject.SetActive(true);
+        if (!goNext)
+        {
+            if (instru.index <= 0)
+            {
+                GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
+        }
+        else
+        {
+            if (instru.index >= instru.SpriteList.Count - 1)
+            {
+                GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
     }
     void OnMouseOver()
     {
-        //If your mouse hovers over the GameObject with the script attached, output this message
-        Debug.Log("on page one's next button.");
-        nextButtonSprite.color = hoverColor;
-        hover = true;
-
-         if (Input.GetMouseButtonDown(0) && hover == true && pageOne == true) //if we're on the first page and next button is pressed
-          {
-              Debug.Log("pressed page one's next button.");
-              //nextButtonSprite.color = noHoverColor;
-              SpriteList[0].SetActive(false); //hide page one
-              SpriteList[1].SetActive(true); //NOW ON page two
-              SpriteList[2].SetActive(false);
-              SpriteList[3].SetActive(false);
-
-              pageOne = false;
-              pageTwo = true;
-          } else if (Input.GetMouseButtonDown(0) && hover == true && pageTwo == true)
-          {
-              Debug.Log("pressed page two's next button.");
-              //nextButtonSprite.color = noHoverColor;
-              SpriteList[0].SetActive(false);
-              SpriteList[1].SetActive(false); //hide page two
-              SpriteList[2].SetActive(true); //NOW ON PAGE three
-              SpriteList[3].SetActive(false);
-
-              pageTwo = false;
-              pageThree = true;
-          } else if (Input.GetMouseButtonDown(0) && hover == true && pageThree == true)
-          {
-              Debug.Log("pressed page two's next button.");
-              //nextButtonSprite.color = noHoverColor;
-              SpriteList[0].SetActive(false);
-              SpriteList[1].SetActive(false);
-              SpriteList[2].SetActive(false);
-              SpriteList[3].SetActive(true); //NOW ON PAGE four
-
-              pageThree = false;
-              pageFour = true;
-              
-          }
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (goNext)
+            {
+                instru.index += 1;
+                instru.gameObject.GetComponent<AudioSource>().Play();
+            }
+            else
+            {
+                instru.index -= 1;
+                instru.gameObject.GetComponent<AudioSource>().Play();
+            }
+            if (instru.index > instru.SpriteList.Count - 1)
+            {
+                instru.index = instru.SpriteList.Count - 1;
+            }else if (instru.index < 0)
+            {
+                instru.index = 0;
+            }
+        }
+        
     }
 
     void OnMouseExit()
     {
-        //The mouse is no longer hovering over the GameObject so output this message each frame
-        Debug.Log("not on button.");
-        nextButtonSprite.color = noHoverColor;
-        hover = false;
+        
     }
 }

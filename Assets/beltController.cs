@@ -17,6 +17,7 @@ public class beltController : MonoBehaviour
     public bool foodOut;
     public foodList connectedList;
     public Animator anim;
+    public AudioSource audio;
     // Start is called before the first frame update
     void Start()
     {
@@ -83,11 +84,16 @@ public class beltController : MonoBehaviour
                     {
                         theFood.transform.Translate(new Vector2(-spd / 2, 0));
                         changeState("moving");
+                        if (!audio.isPlaying)
+                        {
+                            audio.Play();
+                        }
                     }
                     else
                     {
                         foodOut = true;
                         changeState("still");
+                        audio.Stop();
                     }
                 }
                 else
@@ -96,11 +102,16 @@ public class beltController : MonoBehaviour
                     {
                         theFood.transform.Translate(new Vector2(spd / 2, 0));
                         changeState("moving");
+                        if (!audio.isPlaying)
+                        {
+                            audio.Play();
+                        }
                     }
                     else
                     {
                         foodOut = true;
                         changeState("still");
+                        audio.Stop();
                     }
                 }
             }

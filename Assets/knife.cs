@@ -9,6 +9,8 @@ public class knife : MonoBehaviour
     public bool inArea;
     public bool knifePicked;
     public bool dontRotate;
+    public AudioSource pick;
+    public AudioSource put;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class knife : MonoBehaviour
         {
             if (!knifePicked)
             {
+                pick.Play();
                 actualKnife.AddComponent<pick>();
                 actualKnife.GetComponent<pick>().beingPicked = true;
                 actualKnife.GetComponent<pick>().manualOrder = true;
@@ -47,10 +50,12 @@ public class knife : MonoBehaviour
             }
             else
             {
+                put.Play();
                 Destroy(actualKnife.GetComponent<pick>());
                 manager.picked = false;
                 manager.pickObj = null;
                 actualKnife.transform.eulerAngles = new Vector3(0, 0, 0);
+                actualKnife.transform.position = transform.position;
                 knifePicked = false;
             }
         }
