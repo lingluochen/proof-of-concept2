@@ -7,10 +7,11 @@ public class instructions : MonoBehaviour
 {
 
     public GameObject instructionsButtonSprite;
+    public GameObject nextButtonObject, backButtonObject;
     public SpriteRenderer buttonSprite;
     bool hover;
     public Color hoverColor, noHoverColor;
-    public GameObject instructionObject, page1Object;
+    public GameObject instructionObject, page1Object, xObject;
 
 
     // Start is called before the first frame update
@@ -23,12 +24,7 @@ public class instructions : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-          if (Input.GetMouseButtonDown(0) && hover == true)
-          {
-              instructionObject.SetActive(true);
-              page1Object.SetActive(true);
-              Debug.Log("Pressed instruction book.");
-          }       
+ 
     }
 
     void OnMouseOver()
@@ -37,6 +33,16 @@ public class instructions : MonoBehaviour
         Debug.Log("Mouse is over GameObject.");
         buttonSprite.color = hoverColor;
         hover = true;
+
+        if (Input.GetMouseButtonDown(0) && hover == true)
+          {
+              //nextButtonObject.SetActive(true);
+              //backButtonObject.SetActive(false);
+              instructionObject.SetActive(true);
+              page1Object.SetActive(true);
+              xObject.SetActive(true);
+              Debug.Log("Pressed instruction book.");
+          }      
     }
 
     void OnMouseExit()
